@@ -67,7 +67,7 @@ data "aws_iam_policy_document" "example" {
 }
 
 resource "aws_iam_policy" "example" {
-  name   = "example_policy"
+  name   = "${module.label.id}-s3"
   path   = "/"
   policy = data.aws_iam_policy_document.example.json
 }
@@ -84,8 +84,13 @@ data "aws_iam_policy_document" "instance_assume_role_policy" {
 }
 
 resource "aws_iam_role" "instance" {
-  name               = "instance_role"
+  count = var.instance_role_enabled ? 1 : 0
+  name               = "instance_role-${count.index}"
   path               = "/system/"
   assume_role_policy = data.aws_iam_policy_document.instance_assume_role_policy.json
 }
 
+# resource "aws_iam_role_policy_attachment" "test-attach" {
+#   role = aws_iam_role.instance.name
+#   policy_arn = aws_iam_policy.example.arn
+# }
