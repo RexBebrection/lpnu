@@ -16,7 +16,7 @@ module "lpnu" {
     name = "lpnu"
 }
 
-module "lambda_get_all_authors" {
+module "lambda" {
     source = "./modules/lambda/eu-central-1"
     context = module.label.context
     name = "authors"
@@ -42,3 +42,7 @@ module "iam" {
     table_author_arn = module.author.table_arn
     table_courses_arn = module.course.table_arn
 }
+
+
+
+
