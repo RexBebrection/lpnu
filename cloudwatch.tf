@@ -27,28 +27,6 @@ resource "aws_sns_topic_subscription" "this" {
   endpoint  = "denys.odnorih.it.2022@lpnu.ua"
 }
 
-# resource "aws_cloudwatch_metric_alarm" "this" {
-#   alarm_name          = module.notification_label.id
-#   comparison_operator = "GreaterThanOrEqualToThreshold"
-#   evaluation_periods  = "1"
-#   metric_name         = "Errors"
-#   namespace           = "AWS/Lambda"
-#   period              = "60"
-#   statistic           = "Sum"
-#   threshold           = "1"
-#   alarm_description   = "This metric monitors ${module.lambda.lambda_authors_function_name}"
-#   treat_missing_data  = "notBreaching"
-# #   alarm_actions       = [module.notify_slack.slack_topic_arn]
-#   dimensions = {
-#     "FunctionName" = "${module.lambda.lambda_authors_function_name}"
-#   }
-#   datapoints_to_alarm       = 1
-# actions_enabled     = "true"
-#   alarm_actions       = [module.notify_slack.slack_topic_arn]
-#   ok_actions          = [module.notify_slack.slack_topic_arn]
-# }
-
-
 resource "aws_cloudwatch_metric_alarm" "this" {
   alarm_name                = module.label.id
   comparison_operator       = "GreaterThanOrEqualToThreshold"
